@@ -1,0 +1,227 @@
+{
+	"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	"description": "A scatterplot showing horsepower and miles per gallons for various cars.",
+	"data": { "url": "data/infant_mortality.csv" },
+	"transform": [
+		{
+			"filter": "Continent_selection == null || datum['Continent Name'] == Continent_selection"
+		}
+	],
+
+	"params": [
+		{
+			"name": "Continent_selection",
+			"bind": {
+				"input": "select",
+				"options": [
+					null,
+					"North america",
+					"South america",
+					"Europe",
+					"Africa",
+					"Asia",
+					"Oceania"
+				],
+				"labels": [
+					"Show All",
+					"North America",
+					"South America",
+					"Europe",
+					"Africa",
+					"Asia",
+					"Oceania"
+				],
+				"name": "Continent Selection: "
+			}
+		},
+		{
+			"name": "grid",
+			"select": "interval",
+			"bind": "scales"
+		}
+	],
+
+	"hconcat": [
+		{
+			"width": 250,
+			"layer": [
+				{
+					"mark": "circle",
+
+					"encoding": {
+						"color": {
+							"field": "Continent Name",
+							"type": "nominal",
+							"scale": {
+								"domain": [
+									"North america",
+									"South america",
+									"Europe",
+									"Africa",
+									"Asia",
+									"Oceania"
+								],
+								"range": [
+									"#e41a1c",
+									"#984ea3",
+									"#ff7f00",
+									"#a6cee3",
+									"#377eb8",
+									"#a65628"
+								]
+							}
+						},
+
+						"x": {
+							"field": "Basic water access",
+							"type": "quantitative",
+							"title": "Percentage of population that has basic water access"
+						},
+						"y": {
+							"field": "2019",
+							"type": "quantitative",
+							"title": "Infant mortality rate per thousand births",
+							"scale": {
+								"type": "linear",
+								"domain": [0, 85]
+							}
+						},
+
+						"tooltip": [
+							{
+								"field": "Country Name",
+								"type": "nominal",
+								"title": "Country Name"
+							},
+							{
+								"field": "2019",
+								"type": "quantitative",
+								"title": "Infant Mortality Rate",
+								"format": ".2f"
+							}
+						]
+					}
+				}
+			]
+		},
+
+		{
+			"width": 250,
+			"mark": "circle",
+			"encoding": {
+				"color": {
+					"field": "Continent Name",
+					"type": "nominal",
+					"scale": {
+						"domain": [
+							"North america",
+							"South america",
+							"Europe",
+							"Africa",
+							"Asia",
+							"Oceania"
+						],
+						"range": [
+							"#e41a1c",
+							"#984ea3",
+							"#ff7f00",
+							"#a6cee3",
+							"#377eb8",
+							"#a65628"
+						]
+					}
+				},
+				"x": {
+					"field": "Basic sanitation",
+					"type": "quantitative",
+					"title": "Percentage of population that has basic sanitation services"
+				},
+				"y": {
+					"field": "2019",
+					"type": "quantitative",
+					"title": "Infant mortality rate per thousand births",
+					"scale": {
+						"type": "linear",
+						"domain": [0, 85]
+					}
+				},
+				"tooltip": [
+					{
+						"field": "Country Name",
+						"type": "nominal",
+						"title": "Country Name"
+					},
+					{
+						"field": "2019",
+						"type": "quantitative",
+						"title": "Infant Mortality Rate",
+						"format": ".2f"
+					}
+				]
+			}
+		},
+		{
+			"width": 250,
+
+			"mark": "circle",
+			"encoding": {
+				"color": {
+					"field": "Continent Name",
+					"type": "nominal",
+					"scale": {
+						"domain": [
+							"North america",
+							"South america",
+							"Europe",
+							"Africa",
+							"Asia",
+							"Oceania"
+						],
+						"range": [
+							"#e41a1c",
+							"#984ea3",
+							"#ff7f00",
+							"#a6cee3",
+							"#377eb8",
+							"#a65628"
+						]
+					}
+				},
+
+				"x": {
+					"field": "GDP (Millions)",
+					"type": "quantitative",
+					"title": "GDP",
+					"scale": {
+						"type": "log",
+						"domain": [1, 10000000]
+					},
+					"axis": { "tickCount": 6 }
+				},
+				"y": {
+					"field": "2019",
+					"type": "quantitative",
+					"title": "Infant mortality rate per thousand births",
+					"scale": {
+						"type": "linear",
+						"domain": [0, 85]
+					}
+				},
+
+				"tooltip": [
+					{
+						"field": "Country Name",
+						"type": "nominal",
+						"title": "Country Name"
+					},
+					{
+						"field": "2019",
+						"type": "quantitative",
+						"title": "Infant Mortality Rate",
+						"format": ".2f"
+					}
+				]
+			}
+		}
+	]
+}

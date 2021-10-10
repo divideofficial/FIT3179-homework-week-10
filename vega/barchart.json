@@ -1,0 +1,117 @@
+{
+	"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+	"description": "A bar chart with negative values. We can hide the axis domain line, and instead use a conditional grid color to draw a zero baseline.",
+	"width": "container",
+	"height": "container",
+	"data": {
+		"url": "data/infant_mortality.csv"
+	},
+	"params": [
+		{
+			"name": "Mortality_rate_at_least",
+			"value": 0,
+			"bind": {
+				"input": "range",
+
+				"min": 0,
+				"max": 140,
+				"step": 1,
+				"name": "Show countries with difference of more than: "
+			}
+		},
+		{
+			"name": "Continent_selection",
+			"value": "North america",
+			"bind": {
+				"input": "select",
+				"options": [
+					null,
+					"North america",
+					"South america",
+					"Europe",
+					"Africa",
+					"Asia",
+					"Oceania"
+				],
+				"labels": [
+					"Show All",
+					"North america",
+					"South america",
+					"Europe",
+					"Africa",
+					"Asia",
+					"Oceania"
+				],
+				"name": "Continent Selection: "
+			}
+		}
+	],
+
+	"transform": [
+		{ "calculate": "datum[1985]-datum[2019]", "as": "mortality_diff" },
+		{ "calculate": "abs(datum[1985]-datum[2019])", "as": "mortality_diff_abs" },
+		{ "filter": "datum.mortality_diff_abs > Mortality_rate_at_least" },
+		{
+			"filter": "Continent_selection == null || datum['Continent Name'] == Continent_selection"
+		}
+	],
+
+	"encoding": {
+		"y": {
+			"field": "mortality_diff",
+			"title": "Mortality rate from 1985 to 2019",
+			"type": "quantitative",
+			"axis": {
+				"gridColor": {
+					"condition": { "test": "datum.value === 0", "value": "black" },
+					"value": "#ddd"
+				}
+			}
+		},
+		"x": {
+			"field": "Country Name",
+			"type": "nominal"
+		}
+	},
+	"layer": [
+		{
+			"mark": "bar",
+
+			"encoding": {
+				"x": {
+					"field": "Country Name",
+					"type": "nominal"
+				},
+				"y": {
+					"field": "mortality_diff",
+					"title": "Mortality rate from 1985 to 2019",
+					"type": "quantitative",
+					"axis": {
+						"gridColor": {
+							"condition": { "test": "datum.value === 0", "value": "black" },
+							"value": "#ddd"
+						}
+					}
+				},
+
+				"tooltip": [
+					{
+						"field": "Country Name",
+						"type": "nominal",
+						"title": "Country Name"
+					},
+					{
+						"field": "mortality_diff",
+						"type": "quantitative",
+						"title": "Mortality rate change",
+						"format": ".2f"
+					},
+					{
+						"field": "Continent Name",
+						"type": "nominal"
+					}
+				]
+			}
+		}
+	]
+}

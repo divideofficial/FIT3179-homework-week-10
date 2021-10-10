@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+		<script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+
+		<!-- Bootstrap -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+			integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+			integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+			crossorigin="anonymous"
+		></script>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+			crossorigin="anonymous"
+		></script>
+
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous"
+		></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+			integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<!-- CSS file -->
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>What impacts infant mortality?</h1>
+
+			<div class="row">
+				<div class="col-12">
+					<h2>Infant mortality around the world</h2>
+					<div class="visualisation">
+						<div id="map" class="map"></div>
+						<div class="help">
+							<i class="fas fa-mouse-pointer"></i> click and drag the slider to
+							view different years
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="col-12">
+					<h2>What impacts it</h2>
+					<div class="visualisation scatterplot">
+						<div id="scatterplot"></div>
+						<div class="help">
+							🖱️ Use scroll wheel to zoom into each visualisation,
+							<i class="fas fa-mouse-pointer"></i> click and drag to pan each
+							visualisation
+						</div>
+					</div>
+				</div>
+
+				<hr />
+				<div class="col-12"></div>
+					<h2>Change in infant mortality rate from 1985 to 2019</h2>
+					<div class="visualisation">
+						<div id="barchart" class = "map"></div>
+					</div>
+				</div>
+
+				<hr />
+				<div class="col-12"></div>
+					<h2>Effects basic water access has on infant mortality rate</h2>
+					<div class="visualisation" style="margin">
+						<div id="scatterplot2" class = "map"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var spec2 = "vega/map.json";
+			vegaEmbed("#map", spec2, { actions: false })
+				.then(function (result) {
+					// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+				})
+				.catch(console.error);
+		</script>
+
+		<script type="text/javascript">
+			var spec2 = "vega/scatterplot.json";
+			vegaEmbed("#scatterplot", spec2, { actions: false })
+				.then(function (result) {
+					// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+				})
+				.catch(console.error);
+		</script>
+
+		<script type="text/javascript">
+			var spec2 = "vega/barchart.json";
+			vegaEmbed("#barchart", spec2, { actions: false })
+				.then(function (result) {
+					// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+				})
+				.catch(console.error);
+		</script>
+
+		<script type="text/javascript">
+			var spec2 = "vega/scatterplot2.json";
+			vegaEmbed("#scatterplot2", spec2, { actions: false })
+				.then(function (result) {
+					// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+				})
+				.catch(console.error);
+		</script>
+		
+	</body>
+</html>
